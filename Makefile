@@ -7,7 +7,6 @@ H=hyperkube
 
 all: $H.tmp safe_format_and_mount.tmp master-multi.json.tmp master.json.tmp
 	docker build -t ${TAGROOT}/$H:$V .
-	rm $H.tmp
 	docker push ${TAGROOT}/$H:$V
 
 master-multi.json.tmp : master-multi.json
