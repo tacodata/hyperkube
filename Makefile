@@ -7,6 +7,7 @@
 # export IMAGEACCOUNT=mydockerhub
 # you can include the repo if not on dockerhub, like:
 # make IMAGEACCOUNT=gcr.io/google_containers
+#
 IMAGEACCOUNT ?= repo/account
 
 # this picks up the latest VERSION.  You can simply
@@ -15,7 +16,10 @@ IMAGEACCOUNT ?= repo/account
 V ?= $(shell wget -q -O- https://storage.googleapis.com/kubernetes-release/release/stable.txt)
 
 # relative to the cluster directory.  specific files are plucked from there.
-K=../../kubernetes/cluster
+# if your git checkout of kubernetes is not in ../../kubernetes,
+# then set the variable KUBEROOT
+KUBEROOT ?= ../../kubernetes
+K=${KUBEROOT}/../../kubernetes/cluster
 
 H=hyperkube
 IMAGENAME = ${IMAGEACCOUNT}/$H

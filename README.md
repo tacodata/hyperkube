@@ -18,7 +18,7 @@ cd ~/git
 git clone https://github.com/GoogleCloudPlatform/kubernetes.git
 cd tacodata/hyperkube
 ```
-### you need to change tacodata to your docker hub account:
+### to make the current docker image tacodata/hyperkube
 ```
 make IMAGEACCOUNT=tacodata docker
 ```
@@ -30,6 +30,10 @@ make IMAGEACCOUNT=gcr.io/google_containers docker
 ```
 make IMAGEACCOUNT=tacodata V=v0.18.2 docker
 ```
+### if your kubernetes checkout is not in ../../kubernetes
+```
+make IMAGEACCOUNT=tacodata KUBEROOT=/over/here/kubernetes docker
+```
 
 ## Notes
 If make docker works correctly, you will have pushed an image
@@ -40,4 +44,8 @@ is calculated from the script:
 ```
 wget -q -O- https://storage.googleapis.com/kubernetes-release/release/latest.txt
 ```
+
+Important, although the V flag specifies the executable version of the hyperkube
+to include in the image, the files that are included (master.json, safe_format_and_mount)
+from the KUBEROOT directory are not examined for version.
 
