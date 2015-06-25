@@ -22,5 +22,5 @@ make docker
 
 ## Notes
 If make docker works correctly, you will have pushed an image
-to docker hub called TAGROOT/hyperkube:$VERSION
+to docker hub called $TAGROOT/hyperkube:$VERSION
 
