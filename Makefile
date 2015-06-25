@@ -19,7 +19,7 @@ V ?= $(shell wget -q -O- https://storage.googleapis.com/kubernetes-release/relea
 # if your git checkout of kubernetes is not in ../../kubernetes,
 # then set the variable KUBEROOT
 KUBEROOT ?= ../../kubernetes
-K=${KUBEROOT}/../../kubernetes/cluster
+K=${KUBEROOT}/cluster
 
 H=hyperkube
 IMAGENAME = ${IMAGEACCOUNT}/$H
