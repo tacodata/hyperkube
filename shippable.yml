@@ -11,4 +11,6 @@ install:
 
 script:
   - make KUBEROOT=/tmp/kubernetes V=v0.19.3 IMAGEACCOUNT=tacodata all.tmp
+  - pwd
+  - ls *.tmp
 

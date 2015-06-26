@@ -29,7 +29,6 @@ directions :
 	@echo 'make IMAGEACCOUNT=yourdockerhubaccount docker'
 
 all.tmp: $H.tmp safe_format_and_mount.tmp master-multi.json.tmp master.json.tmp
-	cp $H.tmp safe_format_and_mount.tmp master-multi.json.tmp master.json.tmp /tmp
 	@echo 'made everything.  you can do a git commit, or make docker'
 	touch all.tmp
 
