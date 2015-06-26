@@ -6,5 +6,7 @@ python:
 install:
   - rm -rf /tmp/kubernetes
   - git clone https://github.com/GoogleCloudPlatform/kubernetes.git /tmp/kubernetes 
+
+script:
   - make KUBEROOT=/tmp/kubernetes V=v0.19.3 IMAGEACCOUNT=tacodata all.tmp
 
