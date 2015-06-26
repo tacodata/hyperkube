@@ -17,5 +17,5 @@ script:
   - pwd
   - ls *.tmp
 
-after-script:
+after_script:
   - cp -r *.tmp ./shippable/buildoutput
