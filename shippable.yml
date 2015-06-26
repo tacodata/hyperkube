@@ -3,6 +3,9 @@ language: python
 python:
   - "2.7"
 
+before_script:
+  - mkdir -p shippable/buildoutput
+
 install:
   - rm -rf /tmp/kubernetes
   - git clone https://github.com/GoogleCloudPlatform/kubernetes.git /tmp/kubernetes 
@@ -14,3 +17,5 @@ script:
   - pwd
   - ls *.tmp
 
+after-script:
+  - cp -r *.tmp ./shippable/buildoutput

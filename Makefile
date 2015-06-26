@@ -48,17 +48,17 @@ master-multi.json.tmp : $K/images/hyperkube/master-multi.json
 master.json.tmp : $K/images/hyperkube/master.json
 	sed "s/VERSON/$V/g" $< > $@
 
-$H.tmp:$H.$V.tmp
+$H.tmp:$H.$V.src
 	rm -f $@
-	ln $< $@
+	cp $< $@
 
-$H.$V.tmp:
+$H.$V.src:
 	curl -s -o $@ https://storage.googleapis.com/kubernetes-release/release/$V/bin/linux/amd64/$H
 
 safe_format_and_mount.tmp : $K/saltbase/salt/helpers/safe_format_and_mount
 	cp $K/saltbase/salt/helpers/safe_format_and_mount $@
 
 clean :
-	rm -f *.tmp
+	rm -f *.tmp *.src
 
 .PHONY: all
