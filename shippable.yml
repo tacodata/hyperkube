@@ -13,7 +13,7 @@ install:
   - apt-get install -y curl
 
 script:
-  - make KUBEROOT=/tmp/kubernetes V=v0.19.3 IMAGEACCOUNT=tacodata all.tmp
+  - make KUBEROOT=/tmp/kubernetes V=v0.20.0 IMAGEACCOUNT=tacodata all.tmp
   - pwd
   - ls *.tmp
 
