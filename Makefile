@@ -32,6 +32,9 @@ all.tmp: $(KUBEROOT)/_output/local/bin/linux/amd64/$H
 	sed "s/VERSION/$V/g" $K/images/hyperkube/master.json > master.json.tmp
 	cp $K/saltbase/salt/helpers/safe_format_and_mount safe_format_and_mount.tmp
 
+$(KUBEROOT)/_output/local/bin/linux/amd64/$H :
+	(cd $(KUBEROOT); make)
+
 clean :
 	rm -f *.tmp *.src
 
