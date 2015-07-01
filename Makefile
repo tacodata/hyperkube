@@ -33,7 +33,6 @@ all.tmp: $(KUBEROOT)/_output/local/bin/linux/amd64/$H
 	cp $K/saltbase/salt/helpers/safe_format_and_mount safe_format_and_mount.tmp
 
 $(KUBEROOT)/_output/local/bin/linux/amd64/$H :
-	(cd $(KUBEROOT); git checkout $V)
 	(cd $(KUBEROOT); make)
 
 clean :
