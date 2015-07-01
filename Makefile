@@ -14,7 +14,7 @@ IMAGEACCOUNT ?= repo/account
 # hard code it if you want to build an older one:
 # V=v0.18.2 for example
 #V ?= $(shell wget -q -O- https://storage.googleapis.com/kubernetes-release/release/latest.txt)
-# version doesn't matter, except for the help message hyperkube returns
+# the version is used to checkout from the kubernetes repo
 V ?= unknown
 
 # relative to the cluster directory.  specific files are plucked from there.
@@ -33,6 +33,7 @@ all.tmp: $(KUBEROOT)/_output/local/bin/linux/amd64/$H
 	cp $K/saltbase/salt/helpers/safe_format_and_mount safe_format_and_mount.tmp
 
 $(KUBEROOT)/_output/local/bin/linux/amd64/$H :
+	(cd $(KUBEROOT); git checkout $V)
 	(cd $(KUBEROOT); make)
 
 clean :
