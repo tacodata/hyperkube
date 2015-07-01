@@ -1,21 +1,23 @@
-language: python
+language: go
 
-python:
-  - "2.7"
+go:
+  - "1.2"
 
 before_script:
   - mkdir -p shippable/buildoutput
 
+before_install:
+  - source $HOME/.gvm/scripts/gvm;
+  - gvm install release; gvm use release
+  - export GOPATH=$SHIPPABLE_GOPATH
+  - export PATH=$PATH:$GOPATH/bin
+
 install:
   - rm -rf /tmp/kubernetes
   - git clone https://github.com/GoogleCloudPlatform/kubernetes.git /tmp/kubernetes 
-  - apt-get update
-  - apt-get install -y curl
 
 script:
-  - make KUBEROOT=/tmp/kubernetes V=v0.20.1 IMAGEACCOUNT=tacodata all.tmp
-  - pwd
-  - ls *.tmp
+  - make KUBEROOT=/tmp/kubernetes VERSION=v0.20.2 all.tmp
 
 after_script:
   - cp -r *.tmp ./shippable/buildoutput

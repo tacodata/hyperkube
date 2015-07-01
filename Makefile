@@ -14,7 +14,8 @@ IMAGEACCOUNT ?= repo/account
 # hard code it if you want to build an older one:
 # V=v0.18.2 for example
 #V ?= $(shell wget -q -O- https://storage.googleapis.com/kubernetes-release/release/latest.txt)
-V=v0.20.1
+# version doesn't matter, except for the help message hyperkube returns
+V ?= v0.20.2
 
 # relative to the cluster directory.  specific files are plucked from there.
 # if your git checkout of kubernetes is not in ../../kubernetes,
@@ -33,28 +34,14 @@ all.tmp: $H.tmp safe_format_and_mount.tmp master-multi.json.tmp master.json.tmp
 	@echo 'made everything.  you can do a git commit, or make docker'
 	touch all.tmp
 
-dockerbuild: safe_format_and_mount.tmp master-multi.json.tmp master.json.tmp $H.tmp
-	docker build -t ${IMAGENAME}:$V .
-
-dockerpush: safe_format_and_mount.tmp master-multi.json.tmp master.json.tmp $H.tmp
-	docker push ${IMAGENAME}:$V
-
-docker: safe_format_and_mount.tmp master-multi.json.tmp master.json.tmp $H.tmp
-	docker build -t ${IMAGENAME}:$V .
-	docker push ${IMAGENAME}:$V
-
-master-multi.json.tmp : $K/images/hyperkube/master-multi.json
-	sed "s/VERSON/$V/g" $< > $@
-
-master.json.tmp : $K/images/hyperkube/master.json
-	sed "s/VERSON/$V/g" $< > $@
-
-$H.tmp:$H.$V.src
-	rm -f $@
+$H.tmp : $(KUBEROOT)/_output/local/bin/linux/amd64/$H
 	cp $< $@
 
-$H.$V.src:
-	curl -s -o $@ https://storage.googleapis.com/kubernetes-release/release/$V/bin/linux/amd64/$H
+master-multi.json.tmp : $K/images/hyperkube/master-multi.json
+	sed "s/VERSION/$V/g" $< > $@
+
+master.json.tmp : $K/images/hyperkube/master.json
+	sed "s/VERSION/$V/g" $< > $@
 
 safe_format_and_mount.tmp : $K/saltbase/salt/helpers/safe_format_and_mount
 	cp $K/saltbase/salt/helpers/safe_format_and_mount $@
