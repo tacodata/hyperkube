@@ -11,6 +11,7 @@ before_install:
   - gvm install release; gvm use release
   - export GOPATH=$SHIPPABLE_GOPATH
   - export PATH=$PATH:$GOPATH/bin
+  - export HELLOWORLD=y
 
 install:
   - rm -rf /tmp/kubernetes
