@@ -1,5 +1,6 @@
 language: go
 
+
 go:
   - "1.2"
 
@@ -14,7 +15,6 @@ before_install:
   - export HELLOWORLD=y
 
 install:
-  - rm -rf /tmp/kubernetes
   - git clone https://github.com/GoogleCloudPlatform/kubernetes.git /tmp/kubernetes 
   - (cd /tmp/kubernetes; git checkout v1.0.0)
 
