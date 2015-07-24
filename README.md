@@ -1,6 +1,6 @@
 # hyperkube
 
-a Makefile to build your own hyperkube image test
+a Makefile to build your own hyperkube image
 
 ## Summary
 This Makefile and Dockerfile can be used to build your own version
